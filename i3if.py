@@ -10,7 +10,7 @@ class i3focus:
 
     # Define a funtion to switch workspaces when eye position changes
     def on_eye_change(self, ws):
-        if ws == 1:
+        if ws == 0:
             self.i3.command('focus output left')
         else:
             self.i3.command('focus output right')

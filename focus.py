@@ -22,20 +22,15 @@ def main():
         frame = gaze.annotated_frame()
         text = ""
 
-        if gaze.is_blinking():
-            text = "Blinking"
-        elif gaze.is_right():
-            text = "Looking right"
-        elif gaze.is_left():
-            text = "Looking left"
-            if state != 'left':
+        look = gaze.horizontal_ratio()
+        if look is not None:
+            if look > 0.68 and state != "left":
                 focus.on_eye_change(1)
                 state = 'left'
-        elif gaze.is_center():
-            text = "Looking center"
-            if state != 'center':
+            if look < 0.61 and state != 'right':
                 focus.on_eye_change(0)
-                state = 'center'
+                state = "right"
+
            
 if __name__ == "__main__":
     main()
